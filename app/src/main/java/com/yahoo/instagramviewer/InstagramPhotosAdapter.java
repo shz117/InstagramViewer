@@ -44,7 +44,8 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         tvRelTime.setText(DateUtils.getRelativeTimeSpanString(photo.creationTime * 1000, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS));
 
         float ratio = photo.imageHeight / photo.imageWidth;
-        DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+        DisplayMetrics displayMetrics;
+        displayMetrics = getContext().getResources().getDisplayMetrics();
         int viewHeight = Math.round(ratio * displayMetrics.widthPixels);
 
         imgPhoto.setMinimumWidth(displayMetrics.widthPixels);
