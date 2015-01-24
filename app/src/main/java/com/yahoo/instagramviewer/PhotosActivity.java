@@ -56,13 +56,23 @@ public class PhotosActivity extends ActionBarActivity {
                         photo.username = photoJSON.getJSONObject("user").getString("username");
                         if (photoJSON.optJSONObject("caption") != null) {
                             photo.caption = photoJSON.getJSONObject("caption").getString("text");
-                            photo.creationTime = photoJSON.getJSONObject("caption").getLong("created_time");
+                            photo.creationTime = photoJSON.getLong("created_time");
                         }
                         photo.imageHeight = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getInt("height");
                         photo.imageWidth = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getInt("width");
                         photo.likes_count = photoJSON.getJSONObject("likes").getInt("count");
                         photo.imageUrl = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getString("url");
                         photo.avatarUrl = photoJSON.getJSONObject("user").getString("profile_picture");
+                        JSONArray comments = photoJSON.getJSONObject("comments").getJSONArray("data");
+                        ArrayList<PhotoComments> coms = new ArrayList<>();
+                        for (int j = 0; j < 2; j++) {
+                            PhotoComments c = new PhotoComments();
+                            JSONObject commentJSON = comments.getJSONObject(j);
+                            c.text = commentJSON.getString("text");
+                            c.userName = commentJSON.getJSONObject("from").getString("username");
+                            coms.add(c);
+                        }
+                        photo.comments = coms;
                         photos.add(photo);
                     }
                     aPhotos.notifyDataSetChanged();

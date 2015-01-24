@@ -6,5 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="caption_default_text">This is a default caption</string>
-
+    <string name="icon_heart">&#xf004;</string>
+    <string name="icon_clock">&#xf017;</string>
 </resources>
