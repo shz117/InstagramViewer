@@ -1,6 +1,8 @@
 package com.yahoo.instagramviewer;
 
+import android.app.Activity;
 import android.support.annotation.ArrayRes;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,8 +22,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class PhotosActivity extends ActionBarActivity {
+public class PhotosActivity extends Activity {
 
+    private SwipeRefreshLayout swipeContainer;
     public static final String CLIENT_ID = "ed472c3cea474aaaa6c1cd6b6c7b1ba3";
     private ArrayList<InstagramPhoto> photos;
     private InstagramPhotosAdapter aPhotos;
@@ -31,6 +34,21 @@ public class PhotosActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photos);
         fetchPopularPhotos();
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                fetchPopularPhotos();
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
     }
 
 
@@ -79,6 +97,7 @@ public class PhotosActivity extends ActionBarActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                swipeContainer.setRefreshing(false);
             }
         });
 
