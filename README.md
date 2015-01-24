@@ -1,6 +1,6 @@
 # Instagram Popular Feed Viewer
 
-This is an Android application for displaying the most popular Instagram photos feed  using the [Instagram popular photo API](http://www.instagram.com/). 
+This is an Android application for displaying the most popular Instagram photos feed  using the [Instagram popular photo API](https://api.instagram.com/v1/media/popular?client_id=ed472c3cea474aaaa6c1cd6b6c7b1ba3). 
 
 Time spent: 10 hour or so.
 
